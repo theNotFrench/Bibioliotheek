@@ -90,6 +90,7 @@
             this.Controls.Add(this.btnToevoegen);
             this.Name = "Form2";
             this.Text = "toevoegen";
+            this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

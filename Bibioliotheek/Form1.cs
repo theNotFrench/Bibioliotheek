@@ -26,24 +26,7 @@ namespace Bibioliotheek
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-            MySqlConnection connection = new MySqlConnection(connectionString);
-
-            try 
-            {
-                connection.Open();
-                string qry = "Select * from tblfilms";
-                MySqlCommand command = new MySqlCommand(qry, connection);
-                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
-                System.Data.DataTable dataTable = new System.Data.DataTable();
-                adapter.Fill(dataTable);
-                dataGridView1.DataSource = dataTable;
-            }
-            catch (Exception ex) 
-            {
-                MessageBox.Show("er is een fout opgetreden: " + ex.Message);
-            }
-            finally { connection.Close(); }
+            loadData();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -85,9 +68,72 @@ namespace Bibioliotheek
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-            frmUpdate frmUpdate_insantie = new frmUpdate();
-            frmUpdate_insantie.Show();
-            this.Hide();
+            string connectionString = "server=localhost;database=filmproject;uid=root;pwd='';";
+            MySqlConnection connection = new MySqlConnection(connectionString);
+            try
+            {
+                connection.Open();
+
+                string gameId = Convert.ToString(Interaction.InputBox("Enter the ID of the game"));
+
+                string fetchQuery = "SELECT * FROM tblfilms WHERE gameID = ?";
+                MySqlCommand fetchCommand = new MySqlCommand(fetchQuery, connection);
+                fetchCommand.Parameters.AddWithValue("", gameId);
+                MySqlDataReader reader = fetchCommand.ExecuteReader();
+
+                if (reader.Read())
+                {
+
+                    string newTitle = Convert.ToString(Interaction.InputBox("Enter the new title of the game", "Update Game", reader["titel"].ToString()));
+                    int newJaar = Convert.ToInt32(Interaction.InputBox("Enter the new genre of the game", "Update Game", reader["jaar"].ToString()));
+
+                    reader.Close();
+
+                    string updateQuery = "UPDATE tblfilms SET titel = ?, jaar = ? WHERE gameID = ?";
+                    MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection);
+                    updateCommand.Parameters.AddWithValue("", newTitle);
+                    updateCommand.Parameters.AddWithValue("", newJaar);
+                    updateCommand.Parameters.AddWithValue("", gameId);
+                    updateCommand.ExecuteNonQuery();
+
+                    MessageBox.Show("Game details updated successfully");
+                }
+                else
+                {
+                    MessageBox.Show("No game found with the entered ID");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An error occurred: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            loadData();
+        }
+
+        public void loadData() 
+        {
+
+            MySqlConnection connection = new MySqlConnection(connectionString);
+
+            try
+            {
+                connection.Open();
+                string qry = "Select * from tblfilms";
+                MySqlCommand command = new MySqlCommand(qry, connection);
+                MySqlDataAdapter adapter = new MySqlDataAdapter(command);
+                System.Data.DataTable dataTable = new System.Data.DataTable();
+                adapter.Fill(dataTable);
+                dataGridView1.DataSource = dataTable;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("er is een fout opgetreden: " + ex.Message);
+            }
+            finally { connection.Close(); }
         }
     }
 }

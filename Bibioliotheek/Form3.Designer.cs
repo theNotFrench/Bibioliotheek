@@ -69,7 +69,7 @@
             // 
             // btnUpdaten
             // 
-            this.btnUpdaten.Location = new System.Drawing.Point(12, 116);
+            this.btnUpdaten.Location = new System.Drawing.Point(15, 174);
             this.btnUpdaten.Name = "btnUpdaten";
             this.btnUpdaten.Size = new System.Drawing.Size(252, 54);
             this.btnUpdaten.TabIndex = 5;
@@ -82,7 +82,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(283, 176);
+            this.ClientSize = new System.Drawing.Size(281, 249);
             this.Controls.Add(this.txtjaar);
             this.Controls.Add(this.txttitel);
             this.Controls.Add(this.lbljaar);

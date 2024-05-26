@@ -28,7 +28,7 @@ namespace Bibioliotheek
                 connection.Open();
                 string titel = Convert.ToString(txttitel.Text);
                 int jaar = Convert.ToInt16(txtjaar.Text);
-                string qry = "INSERT INTO tblfilms (titel,jaar,aantalDagenOntlening) VALUES (?,?,'0')";
+                string qry = "INSERT INTO tblfilms (titel,jaar,aantalDagenOntlening) VALUES (?,?)";
                 MySqlCommand command = new MySqlCommand(qry, connection);
                 command.Parameters.AddWithValue("", titel);
                 command.Parameters.AddWithValue("", jaar);
@@ -42,6 +42,11 @@ namespace Bibioliotheek
             {
                 connection.Close();
             }
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
