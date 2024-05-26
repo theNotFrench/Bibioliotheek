@@ -85,7 +85,16 @@ namespace Bibioliotheek
                 {
 
                     string newTitle = Convert.ToString(Interaction.InputBox("Enter the new title of the game", "Update Game", reader["titel"].ToString()));
-                    int newJaar = Convert.ToInt32(Interaction.InputBox("Enter the new genre of the game", "Update Game", reader["jaar"].ToString()));
+                    string newJaarString;
+                    int newJaar;
+                    do
+                    {
+                        newJaarString = Interaction.InputBox("Enter the new year of the game", "Update Game", reader["jaar"].ToString());
+                        if (!int.TryParse(newJaarString, out newJaar))
+                        {
+                            MessageBox.Show("Invalid year entered. Please enter a valid number.");
+                        }
+                    } while (!int.TryParse(newJaarString, out newJaar));
 
                     reader.Close();
 

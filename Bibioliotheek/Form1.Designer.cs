@@ -50,7 +50,7 @@
             this.btnToevoegen.Name = "btnToevoegen";
             this.btnToevoegen.Size = new System.Drawing.Size(131, 51);
             this.btnToevoegen.TabIndex = 1;
-            this.btnToevoegen.Text = "Toevoegen";
+            this.btnToevoegen.Text = "Add";
             this.btnToevoegen.UseVisualStyleBackColor = true;
             this.btnToevoegen.Click += new System.EventHandler(this.btnToevoegen_Click);
             // 
@@ -60,7 +60,7 @@
             this.btnZoeken.Name = "btnZoeken";
             this.btnZoeken.Size = new System.Drawing.Size(131, 51);
             this.btnZoeken.TabIndex = 2;
-            this.btnZoeken.Text = "Zoeken";
+            this.btnZoeken.Text = "Search";
             this.btnZoeken.UseVisualStyleBackColor = true;
             this.btnZoeken.Click += new System.EventHandler(this.btnZoeken_Click);
             // 
@@ -89,7 +89,6 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
-
         }
 
         #endregion
