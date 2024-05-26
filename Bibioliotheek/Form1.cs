@@ -159,7 +159,7 @@ namespace Bibioliotheek
             try
             {
                 connection.Open();
-                string qry = "Select * from tblfilms";
+                string qry = "SELECT tblfilms.* FROM tblfilms inner join tblLenen ON tblfilms.gameID = tblLenen.gameID WHERE tblLenen.uitlenen = 0";
                 MySqlCommand command = new MySqlCommand(qry, connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                 System.Data.DataTable dataTable = new System.Data.DataTable();
