@@ -105,7 +105,7 @@ namespace Bibioliotheek
                     updateCommand.Parameters.AddWithValue("", gameId);
                     updateCommand.ExecuteNonQuery();
 
-                    MessageBox.Show("Game details updated successfully");
+                    MessageBox.Show("Game details updated successfuly");
                 }
                 else
                 {
