@@ -31,7 +31,35 @@ namespace Bibioliotheek
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex]; //krijgt de rij waarop geklikt is
+                int gameID = Convert.ToInt32(row.Cells["gameID"].Value); //krijgt de gameID van de rij
+                DialogResult dialogResult = MessageBox.Show("do you want to borrow this game?", "Borrow Game", MessageBoxButtons.YesNo); //vraagt of de gebruiker de game wilt lenen
+                if (dialogResult == DialogResult.Yes)
+                {
+                    MySqlConnection connection = new MySqlConnection(connectionString);
+                    try
+                    {
+                        connection.Open();
+                        string updateQry = "UPDATE tblLenen SET uitlenen = ? WHERE gameID = ?";
+                        MySqlCommand updateCommand = new MySqlCommand(updateQry, connection);
+                        updateCommand.Parameters.AddWithValue("", true);
+                        updateCommand.Parameters.AddWithValue("", gameID);
+                        updateCommand.ExecuteNonQuery();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("An error occurred: " + ex.Message);
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                    
+                    loadData();
+                }
+            }
         }
 
         private void btnToevoegen_Click(object sender, EventArgs e)
