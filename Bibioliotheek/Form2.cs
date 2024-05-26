@@ -25,23 +25,31 @@ namespace Bibioliotheek
             try
             {
 
+
                 connection.Open();
                 string titel = Convert.ToString(txttitel.Text);
-                string jaarString;
+                string jaarString = txtjaar.Text;
                 int jaar;
-                do
+                if (!int.TryParse(jaarString, out jaar))
                 {
-                    jaarString = txtjaar.Text;
-                    if (!int.TryParse(jaarString, out jaar))
-                    {
-                        MessageBox.Show("Invalid year entered.");
-                    }
-                } while (!int.TryParse(jaarString, out jaar));
-                string qry = "INSERT INTO tblfilms (titel,jaar,aantalDagenOntlening) VALUES (?,?)";
-                MySqlCommand command = new MySqlCommand(qry, connection);
-                command.Parameters.AddWithValue("", titel);
-                command.Parameters.AddWithValue("", jaar);
-                command.ExecuteNonQuery();
+                    MessageBox.Show("Invalid year entered.");
+                    txtjaar.Focus();
+                }
+                else
+                {
+                    string qry = "INSERT INTO tblfilms (titel,jaar) VALUES (?,?)";
+                    MySqlCommand command = new MySqlCommand(qry, connection);
+                    command.Parameters.AddWithValue("", titel);
+                    command.Parameters.AddWithValue("", jaar);
+                    command.ExecuteNonQuery();
+                    
+                    MessageBox.Show("Game details updated successfully");
+                    frmMain mainForm = new frmMain();
+                    mainForm.Show();
+                    this.Hide();
+                }
+
+                
             }
             catch (Exception ex)
             {
