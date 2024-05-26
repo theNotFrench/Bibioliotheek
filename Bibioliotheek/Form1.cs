@@ -58,7 +58,7 @@ namespace Bibioliotheek
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Er is een fout opgetreden: " + ex.Message);
+                MessageBox.Show("error: " + ex.Message);
             }
             finally
             {
@@ -140,7 +140,7 @@ namespace Bibioliotheek
             }
             catch (Exception ex)
             {
-                MessageBox.Show("er is een fout opgetreden: " + ex.Message);
+                MessageBox.Show("error " + ex.Message);
             }
             finally { connection.Close(); }
         }

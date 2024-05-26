@@ -18,7 +18,7 @@ namespace Bibioliotheek
             InitializeComponent();
         }
 
-        private void btnToevoegen_Click(object sender, EventArgs e)
+        private void btnToevoegen_Click_1(object sender, EventArgs e)
         {
             string connectionString = "server=localhost;database=filmproject;uid=root;pwd='';";
             MySqlConnection connection = new MySqlConnection(connectionString);
@@ -27,7 +27,16 @@ namespace Bibioliotheek
 
                 connection.Open();
                 string titel = Convert.ToString(txttitel.Text);
-                int jaar = Convert.ToInt16(txtjaar.Text);
+                string jaarString;
+                int jaar;
+                do
+                {
+                    jaarString = txtjaar.Text;
+                    if (!int.TryParse(jaarString, out jaar))
+                    {
+                        MessageBox.Show("Invalid year entered.");
+                    }
+                } while (!int.TryParse(jaarString, out jaar));
                 string qry = "INSERT INTO tblfilms (titel,jaar,aantalDagenOntlening) VALUES (?,?)";
                 MySqlCommand command = new MySqlCommand(qry, connection);
                 command.Parameters.AddWithValue("", titel);
@@ -42,11 +51,6 @@ namespace Bibioliotheek
             {
                 connection.Close();
             }
-        }
-
-        private void Form2_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

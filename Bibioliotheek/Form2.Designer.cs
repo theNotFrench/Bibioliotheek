@@ -28,22 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnToevoegen = new System.Windows.Forms.Button();
             this.lbltitel = new System.Windows.Forms.Label();
             this.lbljaar = new System.Windows.Forms.Label();
             this.txttitel = new System.Windows.Forms.TextBox();
             this.txtjaar = new System.Windows.Forms.TextBox();
+            this.btnToevoegen = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // btnToevoegen
-            // 
-            this.btnToevoegen.Location = new System.Drawing.Point(12, 125);
-            this.btnToevoegen.Name = "btnToevoegen";
-            this.btnToevoegen.Size = new System.Drawing.Size(252, 54);
-            this.btnToevoegen.TabIndex = 0;
-            this.btnToevoegen.Text = "Toevoegen";
-            this.btnToevoegen.UseVisualStyleBackColor = true;
-            this.btnToevoegen.Click += new System.EventHandler(this.btnToevoegen_Click);
             // 
             // lbltitel
             // 
@@ -77,31 +67,39 @@
             this.txtjaar.Size = new System.Drawing.Size(158, 20);
             this.txtjaar.TabIndex = 4;
             // 
+            // btnToevoegen
+            // 
+            this.btnToevoegen.Location = new System.Drawing.Point(15, 133);
+            this.btnToevoegen.Name = "btnToevoegen";
+            this.btnToevoegen.Size = new System.Drawing.Size(249, 47);
+            this.btnToevoegen.TabIndex = 5;
+            this.btnToevoegen.Text = "Add game";
+            this.btnToevoegen.UseVisualStyleBackColor = true;
+            this.btnToevoegen.Click += new System.EventHandler(this.btnToevoegen_Click_1);
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(287, 192);
+            this.Controls.Add(this.btnToevoegen);
             this.Controls.Add(this.txtjaar);
             this.Controls.Add(this.txttitel);
             this.Controls.Add(this.lbljaar);
             this.Controls.Add(this.lbltitel);
-            this.Controls.Add(this.btnToevoegen);
             this.Name = "Form2";
-            this.Text = "toevoegen";
-            this.Load += new System.EventHandler(this.Form2_Load);
+            this.Text = "Add";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
-
         #endregion
 
-        private System.Windows.Forms.Button btnToevoegen;
         private System.Windows.Forms.Label lbltitel;
         private System.Windows.Forms.Label lbljaar;
         private System.Windows.Forms.TextBox txttitel;
         private System.Windows.Forms.TextBox txtjaar;
+        private System.Windows.Forms.Button btnToevoegen;
     }
 }
