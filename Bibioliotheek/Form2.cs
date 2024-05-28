@@ -35,6 +35,11 @@ namespace Bibioliotheek
                     MessageBox.Show("Invalid year entered.");
                     txtjaar.Focus();
                 }
+                else if (titel.Equals("")) 
+                {
+                    MessageBox.Show("Give in a Title");
+                    txttitel.Focus();
+                }
                 else
                 {
                     string qry = "INSERT INTO tblfilms (titel,jaar) VALUES (?,?)";
@@ -42,7 +47,14 @@ namespace Bibioliotheek
                     command.Parameters.AddWithValue("", titel);
                     command.Parameters.AddWithValue("", jaar);
                     command.ExecuteNonQuery();
-                    
+
+
+                    int gameID = Convert.ToInt32(command.LastInsertedId);
+                    string qryLenen = "INSERT INTO tbllenen (gameID) values (?)";
+                    MySqlCommand commandLenen = new MySqlCommand(qryLenen, connection);
+                    commandLenen.Parameters.AddWithValue("", gameID);
+                    commandLenen.ExecuteNonQuery();
+
                     MessageBox.Show("Game details updated successfully");
                     frmMain mainForm = new frmMain();
                     mainForm.Show();
