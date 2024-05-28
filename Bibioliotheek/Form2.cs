@@ -30,15 +30,17 @@ namespace Bibioliotheek
                 string titel = Convert.ToString(txttitel.Text);
                 string jaarString = txtjaar.Text;
                 int jaar;
-                if (!int.TryParse(jaarString, out jaar))
-                {
-                    MessageBox.Show("Invalid year entered.");
-                    txtjaar.Focus();
-                }
-                else if (titel.Equals("")) 
+
+
+                if(titel.Equals(""))
                 {
                     MessageBox.Show("Give in a Title");
                     txttitel.Focus();
+                }
+                else if (!int.TryParse(jaarString, out jaar))
+                {
+                    MessageBox.Show("Invalid year entered.");
+                    txtjaar.Focus();
                 }
                 else
                 {
