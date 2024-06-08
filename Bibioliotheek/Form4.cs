@@ -51,7 +51,7 @@ namespace Bibioliotheek
                 }
                 else
                 {
-                    string qry = "INSERT INTO tblklant (klantnaam,gebruikernaam,wachtwoord,) VALUES (?,?,?)";
+                    string qry = "INSERT INTO tblklant (klantnaam, gebruikernaam, wachtwoord) VALUES (?,?,?)";
                     MySqlCommand command = new MySqlCommand(qry, connection);
                     command.Parameters.AddWithValue("", voornaam);
                     command.Parameters.AddWithValue("", username);

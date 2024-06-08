@@ -177,7 +177,9 @@ namespace Bibioliotheek
 
         private void registerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+            frmRegister frmRegister = new frmRegister();
+            frmRegister.Show();
+            this.Hide();
         }
     }
 }
