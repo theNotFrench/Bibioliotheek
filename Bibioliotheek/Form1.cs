@@ -181,5 +181,12 @@ namespace Bibioliotheek
             frmRegister.Show();
             this.Hide();
         }
+
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLogin frmLogin = new frmLogin();
+            frmLogin.Show();
+            this.Hide();
+        }
     }
 }
