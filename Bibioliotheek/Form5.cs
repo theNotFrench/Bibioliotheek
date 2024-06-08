@@ -44,19 +44,28 @@ namespace Bibioliotheek
                 }
                 else
                 {
-                    string qry = "INSERT INTO tblklant (klantnaam, gebruikernaam, wachtwoord) VALUES (?,?,?)";
+                    string qry = "SELECT COUNT(gebruikernaam, wachtwoord) FROM tblklant WHERE gebruikernaam = ? AND wachtwoord = ?";
                     MySqlCommand command = new MySqlCommand(qry, connection);
                     command.Parameters.AddWithValue("", username);
                     command.Parameters.AddWithValue("", password);
-                    command.ExecuteNonQuery();
+
+                    int userCount = Convert.ToInt32(command.ExecuteScalar());
+                    frmMain mainForm = new frmMain();
+                    if (userCount > 0)
+                    {
+                        MessageBox.Show("Successfully logged in");
+                        mainForm.Show();
+                        this.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid username or password");
+                    }
 
                     MessageBox.Show("Succesfully logged in");
-                    frmMain mainForm = new frmMain();
                     mainForm.Show();
                     this.Hide();
                 }
-
-
             }
             catch (Exception ex)
             {
