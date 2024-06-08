@@ -28,14 +28,20 @@ namespace Bibioliotheek
 
                 connection.Open();
                 string titel = Convert.ToString(txttitel.Text);
+                string producer = Convert.ToString(txtProducer.Text);
                 string jaarString = txtjaar.Text;
                 int jaar;
 
 
-                if(titel.Equals(""))
+                if (titel.Equals(""))
                 {
                     MessageBox.Show("Give in a Title");
                     txttitel.Focus();
+                }
+                else if (producer.Equals("")) 
+                {
+                    MessageBox.Show("Give in a producer");
+                    txtProducer.Focus();
                 }
                 else if (!int.TryParse(jaarString, out jaar))
                 {
@@ -44,18 +50,12 @@ namespace Bibioliotheek
                 }
                 else
                 {
-                    string qry = "INSERT INTO tblfilms (titel,jaar) VALUES (?,?)";
+                    string qry = "INSERT INTO tblgames (gamenaam,producer,uitgavejaar) VALUES (?,?,?)";
                     MySqlCommand command = new MySqlCommand(qry, connection);
                     command.Parameters.AddWithValue("", titel);
+                    command.Parameters.AddWithValue("", producer);
                     command.Parameters.AddWithValue("", jaar);
                     command.ExecuteNonQuery();
-
-
-                    int gameID = Convert.ToInt32(command.LastInsertedId);
-                    string qryLenen = "INSERT INTO tbllenen (gameID) values (?)";
-                    MySqlCommand commandLenen = new MySqlCommand(qryLenen, connection);
-                    commandLenen.Parameters.AddWithValue("", gameID);
-                    commandLenen.ExecuteNonQuery();
 
                     MessageBox.Show("Game details updated successfully");
                     frmMain mainForm = new frmMain();
