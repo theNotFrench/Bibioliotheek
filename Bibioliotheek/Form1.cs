@@ -104,7 +104,7 @@ namespace Bibioliotheek
 
                 string gameId = Convert.ToString(Interaction.InputBox("Enter the ID of the game"));
 
-                string fetchQuery = "SELECT * FROM tblfilms WHERE gameID = ?";
+                string fetchQuery = "SELECT * FROM tblgames WHERE gameID = ?";
                 MySqlCommand fetchCommand = new MySqlCommand(fetchQuery, connection);
                 fetchCommand.Parameters.AddWithValue("", gameId);
                 MySqlDataReader reader = fetchCommand.ExecuteReader();
@@ -112,12 +112,13 @@ namespace Bibioliotheek
                 if (reader.Read())
                 {
 
-                    string newTitle = Convert.ToString(Interaction.InputBox("Enter the new title of the game", "Update Game", reader["titel"].ToString()));
+                    string newTitle = Convert.ToString(Interaction.InputBox("Enter the new title of the game", "Update Game", reader["gamenaam"].ToString()));
+                    string newProducer = Convert.ToString(Interaction.InputBox("enter a new producer of the game", "Update Game", reader["producer"].ToString()));
                     string newJaarString;
                     int newJaar;
                     do
                     {
-                        newJaarString = Interaction.InputBox("Enter the new year of the game", "Update Game", reader["jaar"].ToString());
+                        newJaarString = Interaction.InputBox("Enter the new year of the game", "Update Game", reader["uitgavejaar"].ToString());
                         if (!int.TryParse(newJaarString, out newJaar))
                         {
                             MessageBox.Show("Invalid year entered. Please enter a valid number.");
@@ -126,9 +127,10 @@ namespace Bibioliotheek
 
                     reader.Close();
 
-                    string updateQuery = "UPDATE tblfilms SET titel = ?, jaar = ? WHERE gameID = ?";
+                    string updateQuery = "UPDATE tblgames SET gamenaam = ?, producer = ? , uitgavejaar= ?  WHERE gameID = ?";
                     MySqlCommand updateCommand = new MySqlCommand(updateQuery, connection);
                     updateCommand.Parameters.AddWithValue("", newTitle);
+                    updateCommand.Parameters.AddWithValue("", newProducer);
                     updateCommand.Parameters.AddWithValue("", newJaar);
                     updateCommand.Parameters.AddWithValue("", gameId);
                     updateCommand.ExecuteNonQuery();
