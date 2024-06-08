@@ -174,5 +174,10 @@ namespace Bibioliotheek
             }
             finally { connection.Close(); }
         }
+
+        private void registerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
