@@ -40,7 +40,6 @@ namespace Bibioliotheek
                 if (dataTable.Rows.Count == 0)
                 {
                     MessageBox.Show("You have not borrowed any games.");
-                    Hide();
                 }
                 else
                 {
@@ -97,13 +96,16 @@ namespace Bibioliotheek
                     {
                         connection.Close();
                     }
-
-                    // Refresh the DataGridView
                     loadLendingData();
                 }
             }
         }
 
-
+        private void mainPageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmMain mainForm = new frmMain();
+            mainForm.Show();
+            this.Hide();
+        }
     }
 }

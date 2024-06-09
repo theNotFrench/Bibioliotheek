@@ -123,7 +123,7 @@ namespace Bibioliotheek
             {
                 connection.Open();
                 string zoekqry = Convert.ToString(Interaction.InputBox("geef in de naam van een film"));
-                string query = "SELECT * FROM tblfilms where titel like ?";
+                string query = "SELECT tblgames.* FROM tblgames LEFT JOIN tbllijnuitlenen ON tblgames.gameID = tbllijnuitlenen.gameID WHERE tbllijnuitlenen.gameID IS NULL AND tblgames.gamenaam like ?";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 command.Parameters.AddWithValue("", "%" +zoekqry + "%");
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
