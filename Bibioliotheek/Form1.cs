@@ -60,15 +60,28 @@ namespace Bibioliotheek
                         try
                         {
                             connection.Open();
-                            string updateQry = "INSERT INTO tbluitlenen (klantid, datumbegin, datumterug) VALUES (?,?,?)";
-                            MySqlCommand updateCommand = new MySqlCommand(updateQry, connection);
-                            updateCommand.Parameters.AddWithValue("", klantidstored);
-                            updateCommand.Parameters.AddWithValue("", begindatum);
-                            updateCommand.Parameters.AddWithValue("", einddatum);
-                            updateCommand.ExecuteNonQuery();
+                            string checkQry = "SELECT * FROM tbluitlenen WHERE gameID = ?";
+                            MySqlCommand checkCommand = new MySqlCommand(checkQry, connection);
+                            checkCommand.Parameters.AddWithValue("", gameID);
+                            MySqlDataReader reader = checkCommand.ExecuteReader();
 
-                            MessageBox.Show("sucessfully borrowed the game");
-                        }
+                            if (reader.Read())
+                            {
+                                MessageBox.Show("This game is already being borrowed.");
+                            }
+                            else
+                            {
+                                reader.Close();
+
+                                string updateQry = "INSERT INTO tbluitlenen (klantid, datumbegin, datumterug) VALUES (?,?,?)";
+                                MySqlCommand updateCommand = new MySqlCommand(updateQry, connection);
+                                updateCommand.Parameters.AddWithValue("", klantidstored);
+                                updateCommand.Parameters.AddWithValue("", begindatum);
+                                updateCommand.Parameters.AddWithValue("", einddatum);
+                                updateCommand.ExecuteNonQuery();
+
+                                MessageBox.Show("sucessfully borrowed the game");
+                            }
                         catch (Exception ex)
                         {
                             MessageBox.Show("An error occurred: " + ex.Message);
