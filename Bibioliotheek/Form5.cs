@@ -57,6 +57,7 @@ namespace Bibioliotheek
                             frmMain.klantidstored = reader.GetInt32(0);
                             MessageBox.Show("Successfully logged in");
                             mainForm.isLoggedIn = true;
+                            mainForm.isAdmin = isAdminLogged(frmMain.klantidstored);
                             mainForm.Show();
                             this.Hide();
                         }
@@ -78,6 +79,37 @@ namespace Bibioliotheek
                 connection.Close();
             }
 
+        }
+
+        public bool isAdminLogged(int klantid) 
+        {
+            bool isAdminLogged = false;
+                string connectionString = "server=localhost;database=filmproject;uid=root;pwd='';";
+                MySqlConnection connection = new MySqlConnection(connectionString);
+
+                try
+                {
+                    connection.Open();
+                    string adminQry = "SELECT * FROM tbladmins WHERE klantid = ?";
+                    MySqlCommand adminCommand = new MySqlCommand(adminQry, connection);
+                    adminCommand.Parameters.AddWithValue("", klantid);
+                    using (MySqlDataReader adminReader = adminCommand.ExecuteReader())
+                    {
+                        if (adminReader.Read())
+                        {
+                            isAdminLogged = true;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("error: " + ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            return isAdminLogged;
         }
     }
 }

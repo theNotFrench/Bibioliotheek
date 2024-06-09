@@ -19,6 +19,7 @@ namespace Bibioliotheek
     {
         public static int klantidstored = 0;
         public bool isLoggedIn = false;
+        public bool isAdmin = false;
         public string naam;
         string connectionString = "server=localhost;database=filmproject;uid=root;pwd='';";
         public frmMain()
@@ -30,6 +31,7 @@ namespace Bibioliotheek
         {
             loadData();
             loggedIn();
+            enableAdminoption();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -255,7 +257,22 @@ namespace Bibioliotheek
             isLoggedIn = false;
             klantidstored = 0;
             loggedIn();
+            enableAdminoption();
             MessageBox.Show("logged out sucessfully");
+        }
+
+        private void enableAdminoption() 
+        {
+            if (isAdmin) 
+            {
+                btnToevoegen.Visible = true;
+                btnUpdate.Visible = true;
+            }
+            else 
+            {
+                btnToevoegen.Visible=false;
+                btnUpdate.Visible=false;
+            }
         }
     }
 
