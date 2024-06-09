@@ -127,7 +127,7 @@
             // 
             this.terugbrengenToolStripMenuItem.Name = "terugbrengenToolStripMenuItem";
             this.terugbrengenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.terugbrengenToolStripMenuItem.Text = "Terugbrengen";
+            this.terugbrengenToolStripMenuItem.Text = "Borrowed Games";
             this.terugbrengenToolStripMenuItem.Click += new System.EventHandler(this.terugbrengenToolStripMenuItem_Click);
             // 
             // frmMain

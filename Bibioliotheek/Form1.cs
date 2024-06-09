@@ -277,7 +277,9 @@ namespace Bibioliotheek
 
         private void terugbrengenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            Form6 form6 = new Form6();
+            form6.Show();
+            Hide();
         }
     }
 
