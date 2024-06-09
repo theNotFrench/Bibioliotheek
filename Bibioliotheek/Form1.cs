@@ -274,6 +274,11 @@ namespace Bibioliotheek
                 btnUpdate.Visible=false;
             }
         }
+
+        private void terugbrengenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
