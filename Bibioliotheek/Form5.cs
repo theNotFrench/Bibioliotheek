@@ -44,7 +44,7 @@ namespace Bibioliotheek
                 }
                 else
                 {
-                    string qry = "SELECT COUNT(gebruikernaam, wachtwoord) FROM tblklant WHERE gebruikernaam = ? AND wachtwoord = ?";
+                    string qry = "SELECT COUNT(*) FROM tblklant WHERE gebruikernaam = ? AND wachtwoord = ?";
                     MySqlCommand command = new MySqlCommand(qry, connection);
                     command.Parameters.AddWithValue("", username);
                     command.Parameters.AddWithValue("", password);
@@ -63,9 +63,6 @@ namespace Bibioliotheek
                         MessageBox.Show("Invalid username or password");
                     }
 
-                    MessageBox.Show("Succesfully logged in");
-                    mainForm.Show();
-                    this.Hide();
                 }
             }
             catch (Exception ex)
