@@ -54,6 +54,7 @@ namespace Bibioliotheek
                     if (userCount > 0)
                     {
                         MessageBox.Show("Successfully logged in");
+                        mainForm.isLoggedIn = true;
                         mainForm.Show();
                         this.Hide();
                     }

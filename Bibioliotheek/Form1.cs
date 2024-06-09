@@ -17,6 +17,7 @@ namespace Bibioliotheek
 
     public partial class frmMain : Form
     {
+        public bool isLoggedIn = false;
         public string naam;
         string connectionString = "server=localhost;database=filmproject;uid=root;pwd='';";
         public frmMain()
@@ -27,6 +28,7 @@ namespace Bibioliotheek
         private void Form1_Load(object sender, EventArgs e)
         {
             loadData();
+            loggedIn();
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -39,6 +41,8 @@ namespace Bibioliotheek
                 if (dialogResult == DialogResult.Yes)
                 {
                     MySqlConnection connection = new MySqlConnection(connectionString);
+                    string time = Convert.ToString(Interaction.InputBox("how long do you want to borrow this game?", "3"));
+
                     try
                     {
                         connection.Open();
@@ -188,5 +192,22 @@ namespace Bibioliotheek
             frmLogin.Show();
             this.Hide();
         }
+
+        private void loggedIn() 
+        {
+            if (isLoggedIn) 
+            {
+                loginToolStripMenuItem.Visible = false;
+                registerToolStripMenuItem.Visible = false;
+                logoutToolStripMenuItem.Visible = true;
+            }
+            else
+            {
+                registerToolStripMenuItem.Visible=true;
+                loginToolStripMenuItem.Visible = true;
+                logoutToolStripMenuItem.Visible = false;
+            }
+        }
     }
+
 }
