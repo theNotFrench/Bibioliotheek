@@ -34,7 +34,6 @@ namespace Bibioliotheek
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            MessageBox.Show(klantidstored.ToString());
             if (klantidstored != 0)
             {
                 if (e.RowIndex >= 0)
