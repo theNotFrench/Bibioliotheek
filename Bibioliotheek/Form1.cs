@@ -242,12 +242,14 @@ namespace Bibioliotheek
             {
                 loginToolStripMenuItem.Visible = false;
                 registerToolStripMenuItem.Visible = false;
+                terugbrengenToolStripMenuItem.Visible = false;
                 logoutToolStripMenuItem.Visible = true;
             }
             else
             {
                 registerToolStripMenuItem.Visible=true;
                 loginToolStripMenuItem.Visible = true;
+                terugbrengenToolStripMenuItem.Visible = true;
                 logoutToolStripMenuItem.Visible = false;
             }
         }
