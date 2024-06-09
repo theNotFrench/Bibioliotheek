@@ -34,37 +34,41 @@ namespace Bibioliotheek
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (klantidstored != 0)
             {
-                DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex]; //krijgt de rij waarop geklikt is
-                int gameID = Convert.ToInt32(row.Cells["gameID"].Value); //krijgt de gameID van de rij
-                DialogResult dialogResult = MessageBox.Show("do you want to borrow this game?", "Borrow Game", MessageBoxButtons.YesNo); //vraagt of de gebruiker de game wilt lenen
-                if (dialogResult == DialogResult.Yes)
+                if (e.RowIndex >= 0)
                 {
-                    MySqlConnection connection = new MySqlConnection(connectionString);
-                    string time = Convert.ToString(Interaction.InputBox("how long do you want to borrow this game?", "3"));
+                    DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex]; //krijgt de rij waarop geklikt is
+                    int gameID = Convert.ToInt32(row.Cells["gameID"].Value); //krijgt de gameID van de rij
+                    DialogResult dialogResult = MessageBox.Show("do you want to borrow this game?", "Borrow Game", MessageBoxButtons.YesNo); //vraagt of de gebruiker de game wilt lenen
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        MySqlConnection connection = new MySqlConnection(connectionString);
+                        string time = Convert.ToString(Interaction.InputBox("how long do you want to borrow this game?", "Borrowing Game", "3"));
 
-                    try
-                    {
-                        connection.Open();
-                        string updateQry = "INSERT INTO tbluitlenen (klantid, datumbegin, datumterug) VALUES (?,?,?)";
-                        MySqlCommand updateCommand = new MySqlCommand(updateQry, connection);
-                        updateCommand.Parameters.AddWithValue("", true);
-                        updateCommand.Parameters.AddWithValue("", gameID);
-                        updateCommand.ExecuteNonQuery();
+                        try
+                        {
+                            connection.Open();
+                            string updateQry = "INSERT INTO tbluitlenen (klantid, datumbegin, datumterug) VALUES (?,?,?)";
+                            MySqlCommand updateCommand = new MySqlCommand(updateQry, connection);
+                            updateCommand.Parameters.AddWithValue("", klantidstored);
+                            updateCommand.Parameters.AddWithValue("", gameID);
+                            updateCommand.ExecuteNonQuery();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("An error occurred: " + ex.Message);
+                        }
+                        finally
+                        {
+                            connection.Close();
+                        }
+
+                        loadData();
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("An error occurred: " + ex.Message);
-                    }
-                    finally
-                    {
-                        connection.Close();
-                    }
-                    
-                    loadData();
                 }
             }
+            
         }
 
         private void btnToevoegen_Click(object sender, EventArgs e)
