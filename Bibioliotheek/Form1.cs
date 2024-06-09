@@ -34,6 +34,7 @@ namespace Bibioliotheek
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            MessageBox.Show(klantidstored.ToString());
             if (klantidstored != 0)
             {
                 if (e.RowIndex >= 0)
@@ -44,7 +45,18 @@ namespace Bibioliotheek
                     if (dialogResult == DialogResult.Yes)
                     {
                         MySqlConnection connection = new MySqlConnection(connectionString);
-                        string time = Convert.ToString(Interaction.InputBox("how long do you want to borrow this game?", "Borrowing Game", "3"));
+                        int days;
+                        string daysInput;
+                        do
+                        {
+                            daysInput = Interaction.InputBox("how long do you want to borrow this game?","borrow Game", "3");
+                            if (!int.TryParse(daysInput, out days))
+                            {
+                                MessageBox.Show("Please enter a valid number of days.");
+                            }
+                        } while (!int.TryParse(daysInput, out days));
+                        DateTime  begindatum = DateTime.Now;
+                        DateTime einddatum = begindatum.AddDays(days);
 
                         try
                         {
@@ -52,8 +64,11 @@ namespace Bibioliotheek
                             string updateQry = "INSERT INTO tbluitlenen (klantid, datumbegin, datumterug) VALUES (?,?,?)";
                             MySqlCommand updateCommand = new MySqlCommand(updateQry, connection);
                             updateCommand.Parameters.AddWithValue("", klantidstored);
-                            updateCommand.Parameters.AddWithValue("", gameID);
+                            updateCommand.Parameters.AddWithValue("", begindatum);
+                            updateCommand.Parameters.AddWithValue("", einddatum);
                             updateCommand.ExecuteNonQuery();
+
+                            MessageBox.Show("sucessfully borrowed the game");
                         }
                         catch (Exception ex)
                         {
