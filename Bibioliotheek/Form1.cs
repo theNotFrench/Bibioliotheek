@@ -17,6 +17,7 @@ namespace Bibioliotheek
 
     public partial class frmMain : Form
     {
+        public static int klantidstored = 0;
         public bool isLoggedIn = false;
         public string naam;
         string connectionString = "server=localhost;database=filmproject;uid=root;pwd='';";
@@ -46,7 +47,7 @@ namespace Bibioliotheek
                     try
                     {
                         connection.Open();
-                        string updateQry = "UPDATE tblLenen SET uitlenen = ? WHERE gameID = ?";
+                        string updateQry = "INSERT INTO tbluitlenen (klantid, datumbegin, datumterug) VALUES (?,?,?)";
                         MySqlCommand updateCommand = new MySqlCommand(updateQry, connection);
                         updateCommand.Parameters.AddWithValue("", true);
                         updateCommand.Parameters.AddWithValue("", gameID);
@@ -212,6 +213,7 @@ namespace Bibioliotheek
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             isLoggedIn = false;
+            klantidstored = 0;
             loggedIn();
             MessageBox.Show("logged out sucessfully");
         }

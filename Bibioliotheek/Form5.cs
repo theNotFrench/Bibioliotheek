@@ -16,11 +16,12 @@ namespace Bibioliotheek
         public frmLogin()
         {
             InitializeComponent();
+
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-
+            frmMain mainForm = new frmMain();
             string connectionString = "server=localhost;database=filmproject;uid=root;pwd='';";
             MySqlConnection connection = new MySqlConnection(connectionString);
 
@@ -44,24 +45,27 @@ namespace Bibioliotheek
                 }
                 else
                 {
-                    string qry = "SELECT COUNT(*) FROM tblklant WHERE gebruikernaam = ? AND wachtwoord = ?";
+                    string qry = "SELECT klantid FROM tblklant WHERE gebruikernaam = ? AND wachtwoord = ?";
                     MySqlCommand command = new MySqlCommand(qry, connection);
                     command.Parameters.AddWithValue("", username);
                     command.Parameters.AddWithValue("", password);
 
-                    int userCount = Convert.ToInt32(command.ExecuteScalar());
-                    frmMain mainForm = new frmMain();
-                    if (userCount > 0)
+                    using (MySqlDataReader reader = command.ExecuteReader())
                     {
-                        MessageBox.Show("Successfully logged in");
-                        mainForm.isLoggedIn = true;
-                        mainForm.Show();
-                        this.Hide();
+                        if (reader.Read())
+                        {
+                            frmMain.klantidstored = reader.GetInt32(0);
+                            MessageBox.Show("Successfully logged in");
+                            mainForm.isLoggedIn = true;
+                            mainForm.Show();
+                            this.Hide();
+                        }
+                        else 
+                        {
+                            MessageBox.Show("Invalid username or password");
+                        }
                     }
-                    else
-                    {
-                        MessageBox.Show("Invalid username or password");
-                    }
+                        
 
                 }
             }
