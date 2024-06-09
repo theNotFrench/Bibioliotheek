@@ -208,6 +208,13 @@ namespace Bibioliotheek
                 logoutToolStripMenuItem.Visible = false;
             }
         }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            isLoggedIn = false;
+            loggedIn();
+            MessageBox.Show("logged out sucessfully");
+        }
     }
 
 }
