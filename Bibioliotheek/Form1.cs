@@ -60,11 +60,10 @@ namespace Bibioliotheek
                         try
                         {
                             connection.Open();
-                            string checkQry = "SELECT * FROM tbluitlenen WHERE gameID = ?";
+                            string checkQry = "SELECT * FROM tbllijnuitlenen WHERE gameID = ?";
                             MySqlCommand checkCommand = new MySqlCommand(checkQry, connection);
                             checkCommand.Parameters.AddWithValue("", gameID);
                             MySqlDataReader reader = checkCommand.ExecuteReader();
-
                             if (reader.Read())
                             {
                                 MessageBox.Show("This game is already being borrowed.");
@@ -80,8 +79,18 @@ namespace Bibioliotheek
                                 updateCommand.Parameters.AddWithValue("", einddatum);
                                 updateCommand.ExecuteNonQuery();
 
+                                long luitleenid = updateCommand.LastInsertedId;
+
+                                string insertOrderQry = "INSERT INTO tbllijnuitlenen (uitleenid, gameID) VALUES (?,?)";
+                                MySqlCommand insertOrderCommand = new MySqlCommand(insertOrderQry, connection);
+                                insertOrderCommand.Parameters.AddWithValue("", luitleenid);
+                                insertOrderCommand.Parameters.AddWithValue("", gameID); 
+                                insertOrderCommand.ExecuteNonQuery();
+
+
                                 MessageBox.Show("sucessfully borrowed the game");
                             }
+                        }
                         catch (Exception ex)
                         {
                             MessageBox.Show("An error occurred: " + ex.Message);
