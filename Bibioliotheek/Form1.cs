@@ -208,7 +208,7 @@ namespace Bibioliotheek
             try
             {
                 connection.Open();
-                string qry = "SELECT tblgames.* FROM tblgames";
+                string qry = "SELECT tblgames.* FROM tblgames LEFT JOIN tbllijnuitlenen ON tblgames.gameID = tbllijnuitlenen.gameID WHERE tbllijnuitlenen.gameID IS NULL;";
                 MySqlCommand command = new MySqlCommand(qry, connection);
                 MySqlDataAdapter adapter = new MySqlDataAdapter(command);
                 System.Data.DataTable dataTable = new System.Data.DataTable();
