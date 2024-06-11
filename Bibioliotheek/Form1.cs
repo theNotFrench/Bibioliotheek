@@ -286,12 +286,34 @@ namespace Bibioliotheek
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            removeGame();
         }
 
         private void removeGame() 
         {
+            MySqlConnection connection = new MySqlConnection(connectionString);
 
+            try
+            {
+                connection.Open();
+
+                int gameID = Convert.ToInt32(Interaction.InputBox("give in the gameID of the game you want to delete"));
+
+                string qry = "DELETE FROM tblgames WHERE gameID = ?";
+                MySqlCommand command = new MySqlCommand(qry, connection);
+                command.Parameters.AddWithValue("", gameID);
+                command.ExecuteNonQuery();
+
+                MessageBox.Show("Game removed successfully");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("error: " + ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
     }
 

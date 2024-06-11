@@ -101,8 +101,9 @@ namespace Bibioliotheek
             }
         }
 
-        private void mainPageToolStripMenuItem_Click(object sender, EventArgs e)
+        private void loginToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             frmMain mainForm = new frmMain();
             mainForm.Show();
             this.Hide();
