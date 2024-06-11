@@ -269,11 +269,13 @@ namespace Bibioliotheek
             {
                 btnToevoegen.Visible = true;
                 btnUpdate.Visible = true;
+                btnverwijder.Visible = true;
             }
             else 
             {
                 btnToevoegen.Visible=false;
                 btnUpdate.Visible=false;
+                btnverwijder.Visible=false;
             }
         }
 
