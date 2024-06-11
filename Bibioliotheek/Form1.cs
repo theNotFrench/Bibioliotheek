@@ -283,6 +283,16 @@ namespace Bibioliotheek
             form6.Show();
             Hide();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void removeGame() 
+        {
+
+        }
     }
 
 }

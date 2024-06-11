@@ -38,6 +38,7 @@
             this.logoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.terugbrengenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnverwijder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +56,7 @@
             // 
             this.btnToevoegen.Location = new System.Drawing.Point(12, 403);
             this.btnToevoegen.Name = "btnToevoegen";
-            this.btnToevoegen.Size = new System.Drawing.Size(131, 51);
+            this.btnToevoegen.Size = new System.Drawing.Size(94, 51);
             this.btnToevoegen.TabIndex = 1;
             this.btnToevoegen.Text = "Add";
             this.btnToevoegen.UseVisualStyleBackColor = true;
@@ -63,9 +64,9 @@
             // 
             // btnZoeken
             // 
-            this.btnZoeken.Location = new System.Drawing.Point(341, 403);
+            this.btnZoeken.Location = new System.Drawing.Point(376, 403);
             this.btnZoeken.Name = "btnZoeken";
-            this.btnZoeken.Size = new System.Drawing.Size(131, 51);
+            this.btnZoeken.Size = new System.Drawing.Size(94, 51);
             this.btnZoeken.TabIndex = 2;
             this.btnZoeken.Text = "Search";
             this.btnZoeken.UseVisualStyleBackColor = true;
@@ -73,9 +74,9 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(178, 403);
+            this.btnUpdate.Location = new System.Drawing.Point(276, 403);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(131, 51);
+            this.btnUpdate.Size = new System.Drawing.Size(94, 51);
             this.btnUpdate.TabIndex = 3;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -87,7 +88,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(489, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(482, 24);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -130,12 +131,23 @@
             this.terugbrengenToolStripMenuItem.Text = "Borrowed Games";
             this.terugbrengenToolStripMenuItem.Click += new System.EventHandler(this.terugbrengenToolStripMenuItem_Click);
             // 
+            // btnverwijder
+            // 
+            this.btnverwijder.Location = new System.Drawing.Point(112, 403);
+            this.btnverwijder.Name = "btnverwijder";
+            this.btnverwijder.Size = new System.Drawing.Size(94, 51);
+            this.btnverwijder.TabIndex = 5;
+            this.btnverwijder.Text = "Remove";
+            this.btnverwijder.UseVisualStyleBackColor = true;
+            this.btnverwijder.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.ClientSize = new System.Drawing.Size(489, 466);
+            this.ClientSize = new System.Drawing.Size(482, 462);
+            this.Controls.Add(this.btnverwijder);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.btnZoeken);
             this.Controls.Add(this.btnToevoegen);
@@ -165,6 +177,7 @@
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem registerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem terugbrengenToolStripMenuItem;
+        private System.Windows.Forms.Button btnverwijder;
     }
 }
 
