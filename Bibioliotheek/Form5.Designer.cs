@@ -41,6 +41,7 @@
             this.txtwachtwoord.Name = "txtwachtwoord";
             this.txtwachtwoord.Size = new System.Drawing.Size(158, 20);
             this.txtwachtwoord.TabIndex = 21;
+            this.txtwachtwoord.UseSystemPasswordChar = true;
             // 
             // lblWUsername
             // 

@@ -69,6 +69,7 @@
             this.txtWachtwoord.Name = "txtWachtwoord";
             this.txtWachtwoord.Size = new System.Drawing.Size(158, 20);
             this.txtWachtwoord.TabIndex = 11;
+            this.txtWachtwoord.UseSystemPasswordChar = true;
             // 
             // txtnaam
             // 
